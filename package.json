@@ -1,0 +1,55 @@
+{
+  "name": "@kiipu/cli",
+  "version": "0.0.10",
+  "description": "Kiipu CLI for local authentication, doctor checks, and direct note actions.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kiipu/kiipu.git"
+  },
+  "keywords": [
+    "kiipu",
+    "cli",
+    "skill"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "kiipu": "dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "node scripts/clean-build.mjs && tsc -p tsconfig.json",
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint src test --ext .ts",
+    "test": "tsx --test test/**/*.test.ts",
+    "release:patch": "npm version patch --no-git-tag-version",
+    "release:minor": "npm version minor --no-git-tag-version",
+    "release:major": "npm version major --no-git-tag-version",
+    "pack:local": "node scripts/pack-local.mjs",
+    "verify:package": "node scripts/verify-package.mjs",
+    "publish:dry-run": "node ../../infra/scripts/prepare-cli-release.mjs && npm publish ../../.release/cli-package --dry-run"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.8.1",
+    "@typescript-eslint/eslint-plugin": "^8.12.2",
+    "@typescript-eslint/parser": "^8.12.2",
+    "eslint": "^9.12.0",
+    "eslint-config-prettier": "^9.1.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}
